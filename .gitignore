@@ -1,0 +1,8 @@
+.env
+.env.*
+
+conf/
+vhost/
+html/
+certs/
+acme/
