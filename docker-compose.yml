@@ -18,23 +18,23 @@ services:
       - "80:80"
       - "443:443"
 
-    acme-companion:
-      image: nginxproxy/acme-companion
-      container_name: nginx-proxy-acme
-      restart: "always"
-      environment:
-        - NGINX_PROXY_CONTAINER=nginx-proxy
-        - DEFAULT_EMAIL=${DEFAULT_EMAIL}
-      volumes_from:
-        - nginx-proxy
-      volumes:
-        - ./certs:/etc/nginx/certs:rw
-        - ./acme:/etc/acme.sh
-        - /var/run/docker.sock:/var/run/docker.sock:ro
-      networks:
-        - nginx-proxy
-      depends_on:
-        - nginx-proxy
+  acme-companion:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    restart: "always"
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=${DEFAULT_EMAIL}
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - ./certs:/etc/nginx/certs:rw
+      - ./acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - nginx-proxy
+    depends_on:
+      - nginx-proxy
 
 networks:
   nginx-proxy:
